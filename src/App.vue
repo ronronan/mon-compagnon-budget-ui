@@ -57,14 +57,6 @@ export default {
     } catch (e) {
       //
     }
-  },
-  methods: {
-    logIn() {
-      Vue.prototype.$keycloak.loginFn();
-    },
-    logOut() {
-      Vue.prototype.$keycloak.logoutFn();
-    }
   }
 }
 </script>

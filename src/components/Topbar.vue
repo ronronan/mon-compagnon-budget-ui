@@ -14,7 +14,7 @@
     <template #end>
       <b-navbar-item tag="div">
         <div class="buttons">
-          <a v-if="!authenticated" class="button is-success"><strong>Sign up</strong></a>
+          <a v-if="!authenticated" class="button is-success" @click="signUp"><strong>Sign up</strong></a>
           <a v-if="!authenticated" class="button is-light" @click="logIn">Log in</a>
           <a v-else class="button is-light" @click="logOut">Log Out</a>
         </div>
@@ -40,6 +40,9 @@ export default {
     },
     logOut() {
       Vue.prototype.$keycloak.logoutFn()
+    },
+    signUp() {
+      Vue.prototype.$keycloak.register();
     }
   }
 }
