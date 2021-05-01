@@ -36,7 +36,6 @@ Vue.use(VueKeyCloak, {
     if (Vue.prototype.$keycloak.authenticated) {
       tokenInterceptor();
     }
-    //FIXME: Not automatically logged to keycloak
     new Vue({
       router,
       store,

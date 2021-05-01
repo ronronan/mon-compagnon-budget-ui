@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div class="buttons btn-demo">
-      <a class="button is-primary is-rounded" @click="loadPublic">Get Public content</a>
-      <a class="button is-link is-rounded" @click="loadPrivate">Get Private content</a>
+      <a class="button is-success is-rounded" @click="loadPublic">Get Public content</a>
+      <a class="button is-warning is-rounded" @click="loadPrivate">Get Private content</a>
     </div>
 
   </div>

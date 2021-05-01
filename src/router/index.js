@@ -34,7 +34,7 @@ router.beforeEach((to, from, next) => {
   const keycloak = Vue.prototype.$keycloak;
   if (to.matched.some((record) => record.meta.requireBeAdmin)) {
     if (keycloak.authenticated) {
-      if (keycloak.tokenParsed.realm_access.roles[0] === 'ADMIN') {
+      if (keycloak.hasRealmRole('ADMIN')) {
         next();
       } else {
         alert('You are not allow to go in the admin section');

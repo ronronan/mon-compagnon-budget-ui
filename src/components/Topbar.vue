@@ -1,11 +1,7 @@
 <template>
-  <b-navbar>
-    <template #brand>
-      <b-navbar-item tag="router-link" :to="{ path: '/' }">
-        <img src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
-             alt="Lightweight UI components for Vue.js based on Bulma" >
-      </b-navbar-item>
-    </template>
+  <b-navbar
+    :fixed-top="false"
+    type="is-info">
     <template #start>
       <b-navbar-item tag="router-link" :to="{ path: '/' }">
         Home
@@ -18,7 +14,7 @@
     <template #end>
       <b-navbar-item tag="div">
         <div class="buttons">
-          <a v-if="!authenticated" class="button is-primary"><strong>Sign up</strong></a>
+          <a v-if="!authenticated" class="button is-success"><strong>Sign up</strong></a>
           <a v-if="!authenticated" class="button is-light" @click="logIn">Log in</a>
           <a v-else class="button is-light" @click="logOut">Log Out</a>
         </div>

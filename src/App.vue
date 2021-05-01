@@ -1,15 +1,20 @@
 <template>
   <div id="app">
-    <Sidebar v-if="authenticated"
-             class="sidebar"
-             :email="user.email"
-             :displayName="user.username"
-             :role="user.role" />
-    <div>
-      <Topbar :authenticated="authenticated" />
-      <div>
-        <router-view/>
-      </div>
+    <div class="sidebar-page">
+      <section class="sidebar-layout">
+        <Sidebar v-if="authenticated"
+            class="sidebar"
+            :email="user.email"
+            :firstName="user.firstName"
+            :lastName="user.lastName"
+            :role="user.role" />
+        <div class="main-container">
+          <Topbar :authenticated="authenticated" />
+          <div>
+            <router-view/>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -26,7 +31,12 @@ export default {
   },
   data() {
     return {
-      user: {},
+      user: {
+        email: 'unknow',
+        firstName: 'unknow',
+        lastName: 'unknow',
+        role: 'unkown'
+      },
       authenticated: false
     }
   },
@@ -35,10 +45,12 @@ export default {
       const keycloak = Vue.prototype.$keycloak;
       this.authenticated = keycloak.authenticated;
       if (keycloak.token !== null) {
-        this.user.username = keycloak.userName;
-        //FIXME: No role found for a user
-        // this.user.role = Vue.prototype.$keycloak.tokenParsed.realm_access.roles[0];
-        this.user.email = keycloak.tokenParsed.email;
+        keycloak.loadUserProfile().then((userProfile) => {
+          this.user.email = userProfile.email
+          this.user.firstName = userProfile.firstName
+          this.user.lastName = userProfile.lastName
+          this.user.role = keycloak.realmAccess.roles[0];
+        });
       } else {
         console.log('Not logged');
       }
@@ -64,8 +76,19 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  .sidebar-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+  .main-container {
+    width: 100%;
+  }
 }
-
 #nav {
   padding: 30px;
 
