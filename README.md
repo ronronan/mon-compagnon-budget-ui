@@ -25,6 +25,15 @@ npm run serve
 npm run build
 ```
 
+## Setup local development environment
+
+- Copy `.env.example` to `.env` (before serve locally the project)
+
+```
+cp .env.example .env
+```
+
+- Fill `.env` with values your environment values
 ## Author
 
 Ronan Morel - [Github](https://github.com/ronronan) | [Youtube](https://www.youtube.com/channel/UCu8f_ENFz0hPiwwCocJg2UA) | [Twitter](https://twitter.com/ronronan21) | [Medium](https://medium.com/@ronronan21)
