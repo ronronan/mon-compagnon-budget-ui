@@ -1,16 +1,14 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import VueKeyCloak from '@dsb-norge/vue-keycloak-js'
-import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+import Vue from 'vue';
+import App from './app.vue';
+import router from './router';
+import store from './store';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import VueKeyCloak from '@dsb-norge/vue-keycloak-js';
+import '@/assets/scss/tailwind.scss';
 
 Vue.config.productionTip = false
 
-Vue.use(Buefy)
 Vue.use(VueAxios, axios);
 
 function tokenInterceptor() {

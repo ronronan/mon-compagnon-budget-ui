@@ -1,33 +1,22 @@
 <template>
   <div id="app">
-    <div class="sidebar-page">
-      <section class="sidebar-layout">
-        <Sidebar v-if="authenticated"
-            class="sidebar"
-            :email="user.email"
-            :firstName="user.firstName"
-            :lastName="user.lastName"
-            :role="user.role" />
-        <div class="main-container">
-          <Topbar :authenticated="authenticated" />
-          <div>
-            <router-view/>
-          </div>
-        </div>
-      </section>
+    <div class="main-container">
+      <Topbar :authenticated="authenticated" />
+      <div>
+        <router-view/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import Sidebar from "@/components/Sidebar";
-import Topbar from "@/components/Topbar";
+import Topbar from "@/components/topbar";
 
 export default {
   name: 'App',
   components: {
-    Sidebar, Topbar
+    Topbar
   },
   data() {
     return {
@@ -79,18 +68,6 @@ export default {
   }
   .main-container {
     width: 100%;
-  }
-}
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
   }
 }
 </style>
