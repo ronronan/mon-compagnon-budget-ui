@@ -1,22 +1,37 @@
 <template>
-  <div id="app">
+
+  <div class="flex h-screen bg-gray-200 font-roboto">
+    <Sidebar v-if="authenticated" />
+
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <Topbar :authenticated="authenticated" />
+
+      <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+        <div class="container mx-auto px-6 py-8">
+          <router-view/>
+        </div>
+      </main>
+    </div>
+  </div>
+  <!-- <div id="app">
     <div class="main-container">
       <Topbar :authenticated="authenticated" />
       <div>
         <router-view/>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 import Vue from "vue";
 import Topbar from "@/components/topbar";
+import Sidebar from "@/components/sidebar";
 
 export default {
   name: 'App',
   components: {
-    Topbar
+    Topbar, Sidebar
   },
   data() {
     return {
