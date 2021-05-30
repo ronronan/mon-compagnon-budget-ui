@@ -72,38 +72,35 @@
   </header>
 </template>
 
-<script>
-import Vue from "vue";
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component'
 
-export default {
-  name: "Topbar",
-  data() {
-    return {
-      menuOpen: false,
-      username: 'Unknow'
-    }
-  },
+@Options({
   props: {
-    authenticated: {
-      type: Boolean,
-      default: false
-    }
-  },
-  mounted() {
-    Vue.prototype.$keycloak.loadUserProfile().then((userProfile) => {
-      this.username = userProfile.firstName
-    });
-  },
-  methods: {
-    logIn() {
-      Vue.prototype.$keycloak.loginFn()
-    },
-    logOut() {
-      Vue.prototype.$keycloak.logoutFn()
-    },
-    signUp() {
-      Vue.prototype.$keycloak.register();
-    }
+    authenticated: false
+  }
+})
+export default class Topbar extends Vue {
+  public menuOpen = false;
+  public username = 'Unknow';
+
+  // mounted() {
+  //   Vue.prototype.$keycloak.loadUserProfile().then((userProfile) => {
+  //     this.username = userProfile.firstName
+  //   });
+  // }
+
+  public logIn(): void {
+    console.log('logIn');
+    // this.$keycloak.loginFn();
+  }
+  public logOut(): void {
+    console.log('logOut');
+    // this.$keycloak.logoutFn();
+  }
+  public signUp(): void {
+    console.log('signUp');
+    // Vue.prototype.$keycloak.register();
   }
 }
 </script>

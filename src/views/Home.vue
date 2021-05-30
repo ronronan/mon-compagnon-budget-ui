@@ -10,36 +10,31 @@
   </div>
 </template>
 
-<script>
-import TestApiService from '@/services/test-api.service';
+<script lang="ts">
+import { Vue } from 'vue-class-component';
 
-export default {
-  name: 'Home',
-  data() {
-    return {
-      testApiService: new TestApiService(),
-      resultCallApi: ''
-    }
-  },
-  methods: {
-    loadPrivate() {
-      this.resultCallApi = '';
-      this.testApiService.private()
-          .then((res) => this.resultCallApi = res)
-          .catch((err) => console.error(err))
-    },
-    loadPublic() {
-      this.resultCallApi = '';
-      this.testApiService.public()
-          .then((res) => this.resultCallApi = res)
-          .catch((err) => console.error(err))
-    },
+export default class Home extends Vue {
+  public resultCallApi = '';
+
+  public loadPublic(): void {
+    console.log('loadPublic');
+    // this.resultCallApi = '';
+    // this.testApiService.public()
+    //     .then((res) => this.resultCallApi = res)
+    //     .catch((err) => console.error(err))
+  }
+
+  public loadPrivate(): void {
+    console.log('loadPrivate');
+    // this.resultCallApi = '';
+    //   this.testApiService.private()
+    //       .then((res) => this.resultCallApi = res)
+    //       .catch((err) => console.error(err))
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .btn {
   @apply font-bold py-2 px-4 rounded;
 }

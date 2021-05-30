@@ -92,17 +92,17 @@
   </div>
 </template>
 
-<script>
-// import Vue from "vue";
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
 
-export default {
-  name: "sidebar",
+@Options({
   props: {
     authenticated: {
       type: Boolean,
-      default: false,
-    },
-  },
-  methods: {},
-};
+      default: false
+    }
+  }
+})
+export default class Sidebar extends Vue {
+}
 </script>

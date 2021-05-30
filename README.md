@@ -1,39 +1,27 @@
-# Mon Compagnon Budge - Partie Interface Utilisateur
+# Vue 3 + Typescript + Vite
 
-This application is designed handle a budget.
+This template should help get you started developing with Vue 3 and Typescript in Vite.
 
-## Reference
+## Recommended IDE Setup
 
-[Keycloak Init - Article on Medium](https://medium.com/slickteam/gagner-du-temps-et-d%C3%A9porter-votre-authentification-avec-keycloak-1d4ef8bac387)
+[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
 
-[Keycloak Init - Youtube video](https://www.youtube.com/watch?v=ydbYa2biy2I)
+### If Using `<script setup>`
 
-## Technical information
+[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
 
-### Project setup
-```bash
-npm install
-```
+## Type Support For `.vue` Imports in TS
 
-### Compiles and hot-reloads for development
-```bash
-npm run serve
-```
+Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
 
-### Compiles and minifies for production
-```bash
-npm run build
-```
+### If Using Volar
 
-## Setup local development environment
+Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 
-- Copy `.env.example` to `.env` (before serve locally the project)
+### If Using Vetur
 
-```
-cp .env.example .env
-```
-
-- Fill `.env` with values your environment values
-## Author
-
-Ronan Morel - [Github](https://github.com/ronronan) | [Youtube](https://www.youtube.com/channel/UCu8f_ENFz0hPiwwCocJg2UA) | [Twitter](https://twitter.com/ronronan21) | [Medium](https://medium.com/@ronronan21)
+1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
+2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
+3. Open `src/main.ts` in VSCode
+4. Open the VSCode command palette
+5. Search and run "Select TypeScript version" -> "Use workspace version"

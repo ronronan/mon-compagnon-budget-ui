@@ -1,5 +1,4 @@
 <template>
-
   <div class="flex h-screen bg-gray-200 font-roboto">
     <Sidebar v-if="authenticated" />
 
@@ -23,45 +22,44 @@
   </div> -->
 </template>
 
-<script>
-import Vue from "vue";
-import Topbar from "@/components/topbar";
-import Sidebar from "@/components/sidebar";
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+import Topbar from './components/topbar.vue';
+import Sidebar from './components/sidebar.vue';
 
-export default {
-  name: 'App',
+@Options({
   components: {
     Topbar, Sidebar
-  },
-  data() {
-    return {
-      user: {
-        email: 'unknow',
-        firstName: 'unknow',
-        lastName: 'unknow',
-        role: 'unkown'
-      },
-      authenticated: false
-    }
-  },
-  mounted() {
-    try {
-      const keycloak = Vue.prototype.$keycloak;
-      this.authenticated = keycloak.authenticated;
-      if (keycloak.token !== null) {
-        keycloak.loadUserProfile().then((userProfile) => {
-          this.user.email = userProfile.email
-          this.user.firstName = userProfile.firstName
-          this.user.lastName = userProfile.lastName
-          this.user.role = keycloak.realmAccess.roles[0];
-        });
-      } else {
-        console.log('Not logged');
-      }
-    } catch (e) {
-      //
-    }
   }
+})
+export default class App extends Vue {
+  public authenticated = false;
+  public user = {
+    email: 'unknow',
+    firstName: 'unknow',
+    lastName: 'unknow',
+    role: 'unkown'
+  };
+
+  // mounted() {
+  //   try {
+  //     const keycloak = Vue.prototype.$keycloak;
+  //     this.authenticated = keycloak.authenticated;
+  //     if (keycloak.token !== null) {
+  //       keycloak.loadUserProfile().then((userProfile) => {
+  //         this.user.email = userProfile.email
+  //         this.user.firstName = userProfile.firstName
+  //         this.user.lastName = userProfile.lastName
+  //         this.user.role = keycloak.realmAccess.roles[0];
+  //       });
+  //     } else {
+  //       console.log('Not logged');
+  //     }
+  //   } catch (e) {
+  //     //
+  //   }
+  // }
+
 }
 </script>
 
