@@ -7,60 +7,54 @@
 
       <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
         <div class="container mx-auto px-6 py-8">
-          <router-view/>
+          <router-view />
         </div>
       </main>
     </div>
   </div>
-  <!-- <div id="app">
-    <div class="main-container">
-      <Topbar :authenticated="authenticated" />
-      <div>
-        <router-view/>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 import Topbar from './components/topbar.vue';
 import Sidebar from './components/sidebar.vue';
 
-@Options({
+
+export default defineComponent({
+  name: 'App',
   components: {
     Topbar, Sidebar
+  },
+  data() {
+    return {
+      authenticated: false,
+      user: {
+        email: 'unknow',
+        firstName: 'unknow',
+        lastName: 'unknow',
+        role: 'unkown'
+      }
+    }
+  },
+  mounted() {
+    try {
+      this.authenticated = this.$keycloak.authenticated;
+      if (this.$keycloak.token !== null) {
+        this.$keycloak.loadUserProfile().then((userProfile) => {
+          this.user.email = userProfile.email
+          this.user.firstName = userProfile.firstName
+          this.user.lastName = userProfile.lastName
+          this.user.role = this.$keycloak.realmAccess.roles[0];
+        });
+      } else {
+        console.log('Not logged');
+      }
+    } catch (e) {
+      //
+    }
   }
-})
-export default class App extends Vue {
-  public authenticated = false;
-  public user = {
-    email: 'unknow',
-    firstName: 'unknow',
-    lastName: 'unknow',
-    role: 'unkown'
-  };
+});
 
-  // mounted() {
-  //   try {
-  //     const keycloak = Vue.prototype.$keycloak;
-  //     this.authenticated = keycloak.authenticated;
-  //     if (keycloak.token !== null) {
-  //       keycloak.loadUserProfile().then((userProfile) => {
-  //         this.user.email = userProfile.email
-  //         this.user.firstName = userProfile.firstName
-  //         this.user.lastName = userProfile.lastName
-  //         this.user.role = keycloak.realmAccess.roles[0];
-  //       });
-  //     } else {
-  //       console.log('Not logged');
-  //     }
-  //   } catch (e) {
-  //     //
-  //   }
-  // }
-
-}
 </script>
 
 <style lang="scss">

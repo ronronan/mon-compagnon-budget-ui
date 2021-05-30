@@ -1,37 +1,44 @@
 <template>
   <div class="home">
     <div class="m-4">
-      <button class="btn btn-blue" @click="loadPublic">Get Public content</button>
-      <button class="btn btn-yellow" @click="loadPrivate">Get Private content</button>
+      <button class="btn btn-blue" @click="loadPublic">
+        Get Public content
+      </button>
+      <button class="btn btn-yellow" @click="loadPrivate">
+        Get Private content
+      </button>
     </div>
-
-    <p>{{resultCallApi}}</p>
-
+    <p>{{ resultCallApi }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
+import { TestService } from '../services/test-api.service';
 
-export default class Home extends Vue {
-  public resultCallApi = '';
-
-  public loadPublic(): void {
-    console.log('loadPublic');
-    // this.resultCallApi = '';
-    // this.testApiService.public()
-    //     .then((res) => this.resultCallApi = res)
-    //     .catch((err) => console.error(err))
+export default defineComponent({
+  name: 'Home',
+  data() {
+    return {
+      resultCallApi: '',
+      testService: new TestService(this.axios)
+    }
+  },
+  methods: {
+    loadPublic() {
+      this.resultCallApi = '';
+      this.testService.public()
+        .then((res) => this.resultCallApi = res.toString())
+        .catch((err) => console.error(err))
+    },
+    loadPrivate() {
+      this.resultCallApi = '';
+      this.testService.private()
+        .then((res) => this.resultCallApi = res.toString())
+        .catch((err) => console.error(err))
+    }
   }
-
-  public loadPrivate(): void {
-    console.log('loadPrivate');
-    // this.resultCallApi = '';
-    //   this.testApiService.private()
-    //       .then((res) => this.resultCallApi = res)
-    //       .catch((err) => console.error(err))
-  }
-}
+});
 </script>
 
 <style lang="scss" scoped>
