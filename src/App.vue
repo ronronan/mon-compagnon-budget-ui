@@ -19,6 +19,7 @@ import { defineComponent } from 'vue';
 import Topbar from './components/topbar.vue';
 import Sidebar from './components/sidebar.vue';
 
+import { TestService } from './services/test-api.service';
 
 export default defineComponent({
   name: 'App',
@@ -31,13 +32,17 @@ export default defineComponent({
       email: 'unknow',
       firstName: 'unknow',
       lastName: 'unknow',
-      role: 'unkown'
+      role: 'unkown',
+      testService: new TestService(this.axios)
     }
   },
   mounted() {
     try {
       this.authenticated = this.$keycloak.authenticated;
       if (this.$keycloak.token !== null) {
+        this.testService.private().then((response) => {
+          console.log(response);
+        });
         this.$keycloak.loadUserProfile().then((userProfile) => {
           this.email = userProfile.email
           this.firstName = userProfile.firstName
