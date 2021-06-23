@@ -3,7 +3,7 @@
     <Sidebar v-if="authenticated" />
 
     <div class="flex-1 flex flex-col overflow-hidden">
-      <Topbar :authenticated="authenticated" />
+      <Topbar :authenticated="authenticated" :firstName="firstName" :lastName="lastName" />
 
       <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
         <div class="container mx-auto px-6 py-8">
@@ -28,12 +28,10 @@ export default defineComponent({
   data() {
     return {
       authenticated: false,
-      user: {
-        email: 'unknow',
-        firstName: 'unknow',
-        lastName: 'unknow',
-        role: 'unkown'
-      }
+      email: 'unknow',
+      firstName: 'unknow',
+      lastName: 'unknow',
+      role: 'unkown'
     }
   },
   mounted() {
@@ -41,10 +39,10 @@ export default defineComponent({
       this.authenticated = this.$keycloak.authenticated;
       if (this.$keycloak.token !== null) {
         this.$keycloak.loadUserProfile().then((userProfile) => {
-          this.user.email = userProfile.email
-          this.user.firstName = userProfile.firstName
-          this.user.lastName = userProfile.lastName
-          this.user.role = this.$keycloak.realmAccess.roles[0];
+          this.email = userProfile.email
+          this.firstName = userProfile.firstName
+          this.lastName = userProfile.lastName
+          this.role = this.$keycloak.realmAccess.roles[0];
         });
       } else {
         console.log('Not logged');

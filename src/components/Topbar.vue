@@ -1,9 +1,4 @@
 <template>
-  <!--
-        <ul class="flex flex-row">
-          <li v-if="!authenticated" class="pr-5"><a  class="button is-light" @click="logIn">Log in</a></li>
-          <li v-else class="pr-5"><a class="button is-light" @click="logOut">Log Out</a></li>
-        </ul> -->
   <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-indigo-600">
     <div class="flex flex-col w-full md:space-y-4">
       <header class="w-full h-16 z-40 flex items-center justify-between">
@@ -36,7 +31,7 @@
                 <img alt="profil" src="https://randomuser.me/api/portraits/men/79.jpg" class="mx-auto object-cover rounded-full h-10 w-10 ">
               </a>
               <button class="flex items-center text-gray-500 dark:text-white text-md" @click="menuOpen = !menuOpen">
-                {{ username }}
+                {{ userName }}
                 <svg width="20" height="20" class="ml-2 text-gray-400" fill="currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z" />
                 </svg>
@@ -76,18 +71,30 @@ export default defineComponent({
     authenticated: {
       type: Boolean,
       default: false
+    },
+    firstName: {
+      type: String,
+      default: () => {
+        return 'John'
+      }
+    },
+    lastName: {
+      type: String,
+      default: () => {
+        return 'D.'
+      }
     }
   },
   data() {
     return {
-      menuOpen: false,
-      username: 'Unknow' 
+      menuOpen: false
     }
   },
-  mounted() {
-  //   this.$keycloak.loadUserProfile().then((userProfile) => {
-  //     this.username = userProfile.firstName
-  //   });
+  computed: {
+    userName: function() {
+      const lastName = this.lastName.substring(0, 1) + '.';
+      return `${this.firstName} ${lastName}`;
+    }
   },
   methods: {
     logIn() {
@@ -97,10 +104,6 @@ export default defineComponent({
     logOut() {
       console.log('logOut');
       this.$keycloak.logoutFn();
-    },
-    signUp() {
-      console.log('signUp');
-      // Vue.prototype.$keycloak.register();
     }
   }
 });
