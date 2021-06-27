@@ -1,11 +1,8 @@
 <template>
   <div class="home">
     <div class="m-4">
-      <button class="btn btn-blue" @click="loadPublic">
-        Get Public content
-      </button>
-      <button class="btn btn-yellow" @click="loadPrivate">
-        Get Private content
+      <button class="btn btn-blue" @click="loadUsers">
+        Get Users
       </button>
     </div>
     <p>{{ resultCallApi }}</p>
@@ -14,28 +11,22 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { TestService } from '../services/test-api.service';
+import { UserService } from '../services/user.service';
 
 export default defineComponent({
   name: 'Home',
   data() {
     return {
       resultCallApi: '',
-      testService: new TestService(this.axios)
+      userService: new UserService(this.axios)
     }
   },
   methods: {
-    loadPublic() {
+    loadUsers() {
       this.resultCallApi = '';
-      this.testService.public()
-        .then((res) => this.resultCallApi = res.toString())
-        .catch((err) => console.error(err))
-    },
-    loadPrivate() {
-      this.resultCallApi = '';
-      this.testService.private()
-        .then((res) => this.resultCallApi = res.toString())
-        .catch((err) => console.error(err))
+      this.userService.findAll().then((response) => {
+        this.resultCallApi = JSON.stringify(response, null, 2);
+      })
     }
   }
 });

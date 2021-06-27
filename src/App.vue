@@ -19,7 +19,7 @@ import { defineComponent } from 'vue';
 import Topbar from './components/topbar.vue';
 import Sidebar from './components/sidebar.vue';
 
-import { TestService } from './services/test-api.service';
+import { UserService } from './services/user.service';
 
 export default defineComponent({
   name: 'App',
@@ -33,21 +33,18 @@ export default defineComponent({
       firstName: 'unknow',
       lastName: 'unknow',
       role: 'unkown',
-      testService: new TestService(this.axios)
+      userService: new UserService(this.axios)
     }
   },
   mounted() {
     try {
       this.authenticated = this.$keycloak.authenticated;
       if (this.$keycloak.token !== null) {
-        this.testService.private().then((response) => {
-          console.log(response);
-        });
-        this.$keycloak.loadUserProfile().then((userProfile) => {
-          this.email = userProfile.email
-          this.firstName = userProfile.firstName
-          this.lastName = userProfile.lastName
-          this.role = this.$keycloak.realmAccess.roles[0];
+        this.userService.checkAndRegister().then((response) => {
+          this.email = response.email
+          this.firstName = response.firstname
+          this.lastName = response.lastname
+          this.role = response.role;
         });
       } else {
         console.log('Not logged');
