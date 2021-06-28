@@ -70,7 +70,7 @@ export default defineComponent({
   props: {
     authenticated: {
       type: Boolean,
-      default: false
+      default: true
     },
     firstname: {
       type: String,

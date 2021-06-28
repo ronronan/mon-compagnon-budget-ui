@@ -1,21 +1,29 @@
 <template>
-  <div class="flex h-screen bg-gray-200 font-roboto">
-    <Sidebar v-if="authenticated" />
+  <main>
+    <template v-if="authenticated">
+      <div class="flex h-screen bg-gray-200 font-roboto">
+        <Sidebar />
 
-    <div class="flex-1 flex flex-col overflow-hidden">
-      <Topbar :authenticated="authenticated" :firstname="userFirstname" :lastname="userLastname" />
+        <div class="flex-1 flex flex-col overflow-hidden">
+          <Topbar :firstname="userFirstname" :lastname="userLastname" />
 
-      <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-        <div class="container mx-auto px-6 py-8">
-          <router-view />
+          <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+            <div class="container mx-auto px-6 py-8">
+              <router-view />
+            </div>
+          </main>
         </div>
-      </main>
-    </div>
-  </div>
+      </div>
+    </template>
+    <template v-else>
+      <LandingPage />
+    </template>
+  </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import LandingPage from './views/landing-page.vue';
 import Topbar from './components/topbar.vue';
 import Sidebar from './components/sidebar.vue';
 import { ApiService } from './services/api.service';
@@ -23,7 +31,7 @@ import { ApiService } from './services/api.service';
 export default defineComponent({
   name: 'App',
   components: {
-    Topbar, Sidebar
+    LandingPage, Topbar, Sidebar
   },
   computed: {
     userFirstname(): string {
