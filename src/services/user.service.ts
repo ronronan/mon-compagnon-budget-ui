@@ -1,18 +1,40 @@
 import { AxiosStatic } from 'axios';
+import { User } from '../models/user.model';
 import { ApiService } from './api.service';
 
 export class UserService extends ApiService {
+  private static instanceChild: UserService;
 
-  public constructor(axiosInstance: AxiosStatic) {
+  protected constructor(axiosInstance: AxiosStatic) {
     super(axiosInstance);
   }
 
-  public findAll(): Promise<Object> {
-    return this.httpGet('/api/v1/user')
+  public static getInstance(): UserService {
+    if (!UserService.instanceChild) {
+      UserService.instanceChild = new UserService(ApiService.axiosInstance);
+    }
+
+    return UserService.instanceChild;
   }
 
-  public checkAndRegister(): Promise<Object> {
-    return this.httpPost('/api/v1/user/check')
+  public findAll(): Promise<User[]> {
+    return new Promise((resolve, rejet) => {
+      this.httpGet('/api/v1/user').then((userList: any) => {
+        const listUser: User[] = [];
+        for(const user of userList) {
+          listUser.push(User.fromApi(user));
+        }
+        resolve(listUser);
+      }).catch(rejet);
+    });
+  }
+
+  public checkAndRegister(): Promise<User> {
+    return new Promise((resolve, rejet) => {
+      this.httpPost('/api/v1/user/check').then((userApi: any) => {
+        resolve(User.fromApi(userApi));
+      }).catch(rejet);
+    });
   }
 
 }

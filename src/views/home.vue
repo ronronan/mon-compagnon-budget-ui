@@ -5,28 +5,24 @@
         Get Users
       </button>
     </div>
-    <p>{{ resultCallApi }}</p>
+    <p>{{ usersList }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { UserService } from '../services/user.service';
+import { User } from '../models/user.model';
 
 export default defineComponent({
   name: 'Home',
-  data() {
-    return {
-      resultCallApi: '',
-      userService: new UserService(this.axios)
+  computed: {
+    usersList(): User[] {
+      return this.$store.state.usersList;
     }
   },
   methods: {
     loadUsers() {
-      this.resultCallApi = '';
-      this.userService.findAll().then((response) => {
-        this.resultCallApi = JSON.stringify(response, null, 2);
-      })
+      this.$store.dispatch('loadUser');
     }
   }
 });

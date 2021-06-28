@@ -31,7 +31,7 @@
                 <img alt="profil" src="https://randomuser.me/api/portraits/men/79.jpg" class="mx-auto object-cover rounded-full h-10 w-10 ">
               </a>
               <button class="flex items-center text-gray-500 dark:text-white text-md" @click="menuOpen = !menuOpen">
-                {{ userName }}
+                {{ username }}
                 <svg width="20" height="20" class="ml-2 text-gray-400" fill="currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z" />
                 </svg>
@@ -72,13 +72,13 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    firstName: {
+    firstname: {
       type: String,
       default: () => {
         return 'John'
       }
     },
-    lastName: {
+    lastname: {
       type: String,
       default: () => {
         return 'D.'
@@ -91,19 +91,17 @@ export default defineComponent({
     }
   },
   computed: {
-    userName: function() {
-      const lastName = this.lastName.substring(0, 1) + '.';
-      return `${this.firstName} ${lastName}`;
+    username(): string {
+      const lastname = this.lastname.substring(0, 1) + '.';
+      return `${this.firstname} ${lastname}`;
     }
   },
   methods: {
     logIn() {
-      console.log('logIn');
-      this.$keycloak.loginFn();
+      this.$store.dispatch('logIn');
     },
     logOut() {
-      console.log('logOut');
-      this.$keycloak.logoutFn();
+      this.$store.dispatch('logOut');
     }
   }
 });

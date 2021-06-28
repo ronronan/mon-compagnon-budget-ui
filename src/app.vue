@@ -3,7 +3,7 @@
     <Sidebar v-if="authenticated" />
 
     <div class="flex-1 flex flex-col overflow-hidden">
-      <Topbar :authenticated="authenticated" :firstName="firstName" :lastName="lastName" />
+      <Topbar :authenticated="authenticated" :firstname="userFirstname" :lastname="userLastname" />
 
       <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
         <div class="container mx-auto px-6 py-8">
@@ -18,39 +18,31 @@
 import { defineComponent } from 'vue';
 import Topbar from './components/topbar.vue';
 import Sidebar from './components/sidebar.vue';
-
-import { UserService } from './services/user.service';
+import { ApiService } from './services/api.service';
 
 export default defineComponent({
   name: 'App',
   components: {
     Topbar, Sidebar
   },
-  data() {
-    return {
-      authenticated: false,
-      email: 'unknow',
-      firstName: 'unknow',
-      lastName: 'unknow',
-      role: 'unkown',
-      userService: new UserService(this.axios)
+  computed: {
+    userFirstname(): string {
+      return this.$store.state.user.firstname;
+    },
+    userLastname(): string {
+      return this.$store.state.user.lastname;
+    },
+    authenticated(): boolean {
+      return this.$store.state.authenticated;
     }
   },
+  beforeCreate() {
+    this.$store.dispatch('initKeycloak', this.$keycloak);
+    ApiService.initInstance(this.axios);
+  },
   mounted() {
-    try {
-      this.authenticated = this.$keycloak.authenticated;
-      if (this.$keycloak.token !== null) {
-        this.userService.checkAndRegister().then((response) => {
-          this.email = response.email
-          this.firstName = response.firstname
-          this.lastName = response.lastname
-          this.role = response.role;
-        });
-      } else {
-        console.log('Not logged');
-      }
-    } catch (e) {
-      //
+    if(this.$store.state.authenticated) {
+      this.$store.dispatch('checkAndRegister');
     }
   }
 });
