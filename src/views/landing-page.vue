@@ -1,10 +1,10 @@
 <template>
   <div>
-    <header class="bg-gray-800" x-data="{ isOpen: false }">
+    <header class="bg-gray-600" x-data="{ isOpen: false }">
       <nav class="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
         <div class="flex items-center justify-between">
           <router-link class="text-xl font-bold text-white transition-colors duration-300 transform md:text-2xl hover:text-indigo-400" to="/">
-            MonCompagnonBudget
+            <img src="@/assets/images/icon.png" class="inline w-12" alt="Icon app"> MonCompagnonBudget
           </router-link>
 
           <!-- Mobile menu button -->
@@ -30,9 +30,7 @@
 
       <section class="flex items-center justify-center" style="height: 500px;">
         <div class="text-center">
-          <p class="text-xl font-medium tracking-wider text-gray-300">
-            Mon Compagnon Budget
-          </p>
+          <img src="@/assets/images/logo.png" class="w-48 m-auto" alt="Logo app">
           <h2 class="mt-6 text-3xl font-bold text-white md:text-5xl">
             Une application qui vous accompagne <br> dans la gestion de votre budget
           </h2>
@@ -79,7 +77,7 @@
 
     <section class="bg-white">
       <div class="max-w-5xl px-6 py-16 mx-auto">
-        <div class="px-8 py-12 bg-gray-800 rounded-md md:px-20 md:flex md:items-center md:justify-between">
+        <div class="px-8 py-12 bg-gray-500 rounded-md md:px-20 md:flex md:items-center md:justify-between">
           <div>
             <h3 class="text-2xl font-semibold text-white">
               Accès gratuit et illimité
