@@ -16,6 +16,7 @@ export class ApiService {
     return new Promise((resolve, reject) => {
       return ApiService.axiosInstance.get(this.URL_SERVER + route, params)
         .then((response) => {
+          console.log(response);
           resolve(response.data);
         }).catch((err) => {
           reject(err);

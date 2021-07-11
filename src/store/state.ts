@@ -10,7 +10,7 @@ export interface IState {
 
 export const state: IState = {
   keycloak: undefined,
-  user: new User('unknow@test.fr', 'unknow', 'unknow', null, null, UserRoleEnum.USER),
+  user: new User('unknow', 'unknow@test.fr', 'unknow', 'unknow', null, null, 'https://randomuser.me/api/portraits/men/79.jpg', UserRoleEnum.USER),
   authenticated: false,
   usersList: []
 };

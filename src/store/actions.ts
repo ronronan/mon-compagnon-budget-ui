@@ -29,6 +29,7 @@ export const actions: IActions = {
   },
   async loadUser({ commit }) {
     const listUsers = await UserService.getInstance().findAll();
+    console.log(listUsers);
     commit('setListUsers', listUsers)
   }
 }

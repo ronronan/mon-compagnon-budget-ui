@@ -28,7 +28,7 @@
               </router-link>
               <span class="w-1 h-8 rounded-lg bg-gray-200" />
               <a href="#" class="block relative">
-                <img alt="profil" src="https://randomuser.me/api/portraits/men/79.jpg" class="mx-auto object-cover rounded-full h-10 w-10 ">
+                <img alt="Profile picture" :src="profilePicture" class="mx-auto object-cover rounded-full h-10 w-10 ">
               </a>
               <button class="flex items-center text-gray-500 dark:text-white text-md" @click="menuOpen = !menuOpen">
                 {{ username }}
@@ -74,14 +74,20 @@ export default defineComponent({
     },
     firstname: {
       type: String,
-      default: () => {
+      default() {
         return 'John'
       }
     },
     lastname: {
       type: String,
-      default: () => {
+      default() {
         return 'D.'
+      }
+    },
+    profilePicture: {
+      type: String,
+      default() {
+        return 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
       }
     }
   },

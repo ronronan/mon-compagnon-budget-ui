@@ -5,7 +5,7 @@
         <Sidebar />
 
         <div class="flex-1 flex flex-col overflow-hidden">
-          <Topbar :firstname="userFirstname" :lastname="userLastname" />
+          <Topbar :firstname="userFirstname" :lastname="userLastname" :profile-picture="userPicture" />
 
           <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
             <div class="container mx-auto px-6 py-8">
@@ -39,6 +39,9 @@ export default defineComponent({
     },
     userLastname(): string {
       return this.$store.state.user.lastname;
+    },
+    userPicture(): string {
+      return this.$store.state.user.picture;
     },
     authenticated(): boolean {
       return this.$store.state.authenticated;
