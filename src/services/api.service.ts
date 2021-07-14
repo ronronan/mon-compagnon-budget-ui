@@ -12,7 +12,7 @@ export class ApiService {
     ApiService.instance = new ApiService(axiosInstance);
   }
 
-  public httpGet(route: any, params: AxiosRequestConfig|undefined = undefined): Promise<Object> {
+  public httpGet(route: any, params: AxiosRequestConfig|undefined = undefined): Promise<any> {
     return new Promise((resolve, reject) => {
       return ApiService.axiosInstance.get(this.URL_SERVER + route, params)
         .then((response) => {
@@ -23,9 +23,9 @@ export class ApiService {
     });
   }
 
-  public httpPost(route: any, params: AxiosRequestConfig|undefined = undefined): Promise<Object> {
+  public httpPost(route: any, data: any, config: AxiosRequestConfig|undefined = undefined): Promise<any> {
     return new Promise((resolve, reject) => {
-      return ApiService.axiosInstance.post(this.URL_SERVER + route, params)
+      return ApiService.axiosInstance.post(this.URL_SERVER + route, data, config)
         .then((response) => {
           resolve(response.data);
         }).catch((err) => {
@@ -34,9 +34,9 @@ export class ApiService {
     });
   }
 
-  public httpPut(route: any, params: AxiosRequestConfig|undefined = undefined): Promise<Object> {
+  public httpPut(route: any, data: any, config: AxiosRequestConfig|undefined = undefined): Promise<any> {
     return new Promise((resolve, reject) => {
-      return ApiService.axiosInstance.put(this.URL_SERVER + route, params)
+      return ApiService.axiosInstance.put(this.URL_SERVER + route, data, config)
         .then((response) => {
           resolve(response.data);
         }).catch((err) => {
@@ -45,7 +45,7 @@ export class ApiService {
     });
   }
 
-  public httpDelete(route: any, params: AxiosRequestConfig|undefined = undefined): Promise<Object> {
+  public httpDelete(route: any, params: AxiosRequestConfig|undefined = undefined): Promise<any> {
     return new Promise((resolve, reject) => {
       return ApiService.axiosInstance.delete(this.URL_SERVER + route, params)
         .then((response) => {

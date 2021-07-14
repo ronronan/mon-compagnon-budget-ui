@@ -16,6 +16,7 @@ export interface IActions extends ActionTree<IState, IState> {
   loadUser(context: ActionContext<IState, IState>): void;
   loadBankAccountByUser(context: ActionContext<IState, IState>): void;
   saveBankAccount(context: ActionContext<IState, IState>, payload: any): Promise<void>;
+  updateAmountBankAccount(context: ActionContext<IState, IState>, payload: any): Promise<void>;
 }
 
 export const actions: IActions = {
@@ -69,8 +70,14 @@ export const actions: IActions = {
     commit('setListBankAccount', listBankAccount);
   },
   saveBankAccount({ state }, payload: any): Promise<void> {
-    console.log(payload)
-    const bankAccount = new BankAccount(0, payload.name, payload.bankName, null, null, payload.amount);
-    return BankAccountService.getInstance().createBackAccount(state.user.id, bankAccount);
+    return new Promise((resolve, reject) => {
+      const bankAccount = new BankAccount(0, payload.name, payload.bankName, null, null, payload.amount);
+      return BankAccountService.getInstance().createBackAccount(state.user.id, bankAccount).then(() => resolve()).catch(reject);
+    })
+  },
+  updateAmountBankAccount(context: ActionContext<IState, IState>, payload: any): Promise<void> {
+    return new Promise((resolve, reject) => {
+      return BankAccountService.getInstance().updateAmountBankAccount(payload).then(() => resolve()).catch(reject);
+    })
   }
 }

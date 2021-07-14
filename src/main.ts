@@ -21,7 +21,7 @@ const app = createApp(App)
       url: import.meta.env.VITE_KEYCLOAK_AUTH_URL
     },
     init: {
-      flow: 'standard',
+      flow: 'implicit',
       onLoad: 'check-sso'
     },
     onReady: (keycloak: VueKeycloakInstance) => {

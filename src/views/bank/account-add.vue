@@ -70,11 +70,14 @@ export default defineComponent({
     }
   },
   methods: {
-    checkForm(e: any) {
+    checkForm(e: Event) {
+      const router = this.$router;
       this.$store.dispatch('saveBankAccount', {
         name: this.name,
         bankName: this.bankName,
         amount: this.amount
+      }).then(() => {
+        router.push("/account");
       });
       e.preventDefault();
     }
