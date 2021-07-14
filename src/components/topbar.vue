@@ -1,5 +1,5 @@
 <template>
-  <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-indigo-600">
+  <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-green-300">
     <div class="flex flex-col w-full md:space-y-4">
       <header class="w-full h-16 z-40 flex items-center justify-between">
         <div class="block lg:hidden ml-6">

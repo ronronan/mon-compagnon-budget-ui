@@ -15,7 +15,7 @@ export class BankAccount {
       bankAccountApi.bankName,
       new Date(bankAccountApi.createdAt),
       new Date(bankAccountApi.updateAt),
-      bankAccountApi.amount
+      bankAccountApi.amount.toFixed(2)
     );
   }
 }

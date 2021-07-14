@@ -1,6 +1,7 @@
 import { VueKeycloakInstance } from "@dsb-norge/vue-keycloak-js/dist/types";
 import { ActionContext, ActionTree } from "vuex";
 import { UserService } from "../services/user.service";
+import { BankAccountService } from "../services/bank-account.service";
 import { IState } from "./state";
 import {NavigationGuardNext, RouteLocationNormalized, Router, RouteRecordNormalized} from "vue-router";
 
@@ -12,6 +13,7 @@ export interface IActions extends ActionTree<IState, IState> {
   checkAndRegister(context: ActionContext<IState, IState>): void;
   checkInitRoute(context: ActionContext<IState, IState>, router: Router): void;
   loadUser(context: ActionContext<IState, IState>): void;
+  loadBankAccountByUser(context: ActionContext<IState, IState>): void;
 }
 
 export const actions: IActions = {
@@ -59,5 +61,9 @@ export const actions: IActions = {
   async loadUser({ commit }) {
     const listUsers = await UserService.getInstance().findAll();
     commit('setListUsers', listUsers)
+  },
+  async loadBankAccountByUser({ commit, state }) {
+    const listBankAccount = await BankAccountService.getInstance().findAccountsByUser(state.user.id);
+    commit('setListBankAccount', listBankAccount);
   }
 }
