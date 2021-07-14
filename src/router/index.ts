@@ -28,12 +28,30 @@ const routes: Array<RouteRecordRaw> = [
       requireBeAdmin: false,
       requireBeAuthenticated: true
     }
+  },
+  {
+    path: '/account/add',
+    name: 'AccountAdd',
+    component: () => import(/* webpackChunkName: "account-add" */ '../views/bank/account-add.vue'),
+    meta: {
+      requireBeAdmin: false,
+      requireBeAuthenticated: true
+    }
+  },
+  {
+    path: '/account/edit/:id',
+    name: 'AccountEdit',
+    component: () => import(/* webpackChunkName: "account-edit" */ '../views/bank/account-edit.vue'),
+    meta: {
+      requireBeAdmin: false,
+      requireBeAuthenticated: true
+    }
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory((import.meta.env.VITE_BASE_URL === undefined || import.meta.env.VITE_BASE_URL === false || import.meta.env.VITE_BASE_URL === true) ? '/' : import.meta.env.VITE_BASE_URL),
   routes
-})
+});
 
-export default router
+export default router;

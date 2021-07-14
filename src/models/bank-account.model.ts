@@ -1,6 +1,6 @@
 export class BankAccount {
   constructor(
-    public id: string,
+    public id: number,
     public name: string,
     public bankName: string,
     public createdAt: Date|null,

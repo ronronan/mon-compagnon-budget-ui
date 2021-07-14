@@ -6,6 +6,7 @@
           <h5 class="text-white">
             <strong>{{ name }}</strong> -
             <span>{{ bankName }}</span>
+            <router-link class="bank-account-edit-link" :to="{name: 'AccountEdit', params: { id: accountId }}">Edit</router-link>
           </h5>
           <h3 class="text-white text-3xl">
             {{ amount }} &euro;
@@ -22,6 +23,12 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'BankAccountItem',
   props: {
+    accountId: {
+      type: Number,
+      default() {
+        return 0;
+      }
+    },
     name: {
       type: String,
       default() {
@@ -35,9 +42,9 @@ export default defineComponent({
       }
     },
     amount: {
-      type: Number,
+      type: String,
       default() {
-        return 0;
+        return "0.00";
       }
     },
   },
@@ -61,5 +68,8 @@ export default defineComponent({
 }
 .bank-account-card-fourth-container {
   @apply flex-1 text-right;
+}
+.bank-account-edit-link {
+  @apply bg-white text-black mx-2;
 }
 </style>

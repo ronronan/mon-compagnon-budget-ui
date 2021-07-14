@@ -31,7 +31,7 @@ export class BankAccountService extends ApiService {
 
   public createBackAccount(userId: number, bankAccount: BankAccount): Promise<void> {
     return new Promise((resolve, rejet) => {
-      this.httpPost(`/api/v1/bank-account/${userId}`, { params: bankAccount })
+      this.httpPost(`api/v1/bank-account/${userId}`, { params: bankAccount })
         .then(() => resolve())
         .catch(rejet);
     });
@@ -39,7 +39,7 @@ export class BankAccountService extends ApiService {
 
   public updateAmountBankAccount(bankAccountUpdated: BankAccount): Promise<void> {
     return new Promise((resolve, rejet) => {
-      this.httpPut(`/api/v1/bank-account/amount`, { params: bankAccountUpdated })
+      this.httpPut(`api/v1/bank-account/amount`, { params: bankAccountUpdated })
         .then(() => resolve())
         .catch(rejet);
     });

@@ -4,6 +4,7 @@ import { UserService } from "../services/user.service";
 import { BankAccountService } from "../services/bank-account.service";
 import { IState } from "./state";
 import {NavigationGuardNext, RouteLocationNormalized, Router, RouteRecordNormalized} from "vue-router";
+import {BankAccount} from "../models/bank-account.model";
 
 export interface IActions extends ActionTree<IState, IState> {
   initKeycloak(context: ActionContext<IState, IState>, keycloak: VueKeycloakInstance): void;
@@ -14,6 +15,7 @@ export interface IActions extends ActionTree<IState, IState> {
   checkInitRoute(context: ActionContext<IState, IState>, router: Router): void;
   loadUser(context: ActionContext<IState, IState>): void;
   loadBankAccountByUser(context: ActionContext<IState, IState>): void;
+  saveBankAccount(context: ActionContext<IState, IState>, payload: any): Promise<void>;
 }
 
 export const actions: IActions = {
@@ -65,5 +67,10 @@ export const actions: IActions = {
   async loadBankAccountByUser({ commit, state }) {
     const listBankAccount = await BankAccountService.getInstance().findAccountsByUser(state.user.id);
     commit('setListBankAccount', listBankAccount);
+  },
+  saveBankAccount({ state }, payload: any): Promise<void> {
+    console.log(payload)
+    const bankAccount = new BankAccount(0, payload.name, payload.bankName, null, null, payload.amount);
+    return BankAccountService.getInstance().createBackAccount(state.user.id, bankAccount);
   }
 }
