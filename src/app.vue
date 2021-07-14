@@ -2,7 +2,7 @@
   <main>
     <template v-if="authenticated">
       <div class="flex h-screen bg-gray-200 font-roboto">
-        <Sidebar />
+        <Sidebar :is-admin="isUserAdmin" />
 
         <div class="flex-1 flex flex-col overflow-hidden">
           <Topbar :firstname="userFirstname" :lastname="userLastname" :profile-picture="userPicture" />
@@ -44,16 +44,21 @@ export default defineComponent({
       return this.$store.state.user.picture;
     },
     authenticated(): boolean {
-      return this.$store.state.authenticated;
+      return this.$store.getters.isUserAuthenticated;
+    },
+    isUserAdmin(): boolean {
+      return this.$store.getters.isUserAdmin;
     }
   },
   beforeCreate() {
     this.$store.dispatch('initKeycloak', this.$keycloak);
+    this.$store.dispatch('initRouter', this.$router);
     ApiService.initInstance(this.axios);
   },
   mounted() {
-    if(this.$store.state.authenticated) {
+    if(this.$store.getters.isUserAuthenticated) {
       this.$store.dispatch('checkAndRegister');
+      this.$store.dispatch('checkInitRoute', this.$router);
     }
   }
 });

@@ -100,7 +100,7 @@
         <p class="text-gray-500">
           © 2021 Morel Corp. Tout droit réservé.
         </p>
-        <router-link class="font-medium text-gray-700" to="/about">
+        <router-link class="font-medium text-gray-700" to="/">
           Mentions légales
         </router-link>
       </div>

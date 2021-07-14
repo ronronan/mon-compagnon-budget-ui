@@ -5,7 +5,6 @@ import { IState } from "./state";
 
 export interface IMutation extends MutationTree<IState> {
   setKeycloak(state: IState, keycloak: VueKeycloakInstance): void;
-  setAuthenticated(state: IState, authenticated: boolean): void;
   setUser(state: IState, userApi: any): void;
   setListUsers(state: IState, listUsers: any): void;
 }
@@ -13,9 +12,6 @@ export interface IMutation extends MutationTree<IState> {
 export const mutations: IMutation = {
   setKeycloak(state: IState, keycloak: VueKeycloakInstance) {
     state.keycloak = keycloak;
-  },
-  setAuthenticated(state: IState, authenticated: boolean) {
-    state.authenticated = authenticated;
   },
   setUser(state: IState, userApi: User) {
     state.user = userApi

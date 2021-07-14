@@ -1,16 +1,14 @@
 import { VueKeycloakInstance } from "@dsb-norge/vue-keycloak-js/dist/types";
-import { User, UserRoleEnum } from "../models/user.model";
+import { User } from "../models/user.model";
 
 export interface IState {
   keycloak?: VueKeycloakInstance,
-  authenticated: boolean,
   user: User,
   usersList: User[]
 }
 
 export const state: IState = {
   keycloak: undefined,
-  user: new User('unknow', 'unknow@test.fr', 'unknow', 'unknow', null, null, 'https://randomuser.me/api/portraits/men/79.jpg', UserRoleEnum.USER),
-  authenticated: false,
+  user: new User('unknown', 'unknow@test.fr', 'unknown', 'unknown', null, null, 'https://randomuser.me/api/portraits/men/79.jpg', User.ROLE_USER),
   usersList: []
 };

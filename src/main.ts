@@ -4,7 +4,6 @@ import router from './router';
 import store from './store';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import { ApiService } from './services/api.service';
 import VueKeycloak from '@dsb-norge/vue-keycloak-js';
 import { VueKeycloakInstance } from "@dsb-norge/vue-keycloak-js/dist/types";
 import './assets/scss/tailwind.scss';
@@ -31,9 +30,13 @@ const app = createApp(App)
       }, error => {
         return Promise.reject(error)
       })
+      if (!keycloak.authenticated) {
+        router.push("/").then();
+      }
       app.mount("#app");
     }
   });
+
 
 // Allow usage of this.$keycloak in components
 declare module '@vue/runtime-core' {

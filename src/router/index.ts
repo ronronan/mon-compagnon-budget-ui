@@ -1,16 +1,26 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import {
+  createRouter,
+  createWebHistory,
+  RouteRecordRaw
+} from 'vue-router';
 import Home from '../views/home.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      requireBeAdmin: false,
+    }
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/about.vue')
+    path: '/admin/users',
+    name: 'UserList',
+    component: () => import(/* webpackChunkName: "about" */ '../views/admin/user-list.vue'),
+    meta: {
+      requireBeAdmin: true,
+    }
   }
 ]
 

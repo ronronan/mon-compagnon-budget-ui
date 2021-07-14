@@ -1,8 +1,6 @@
-export enum UserRoleEnum {
-  ADMIN, USER
-}
-
 export class User {
+  public static ROLE_ADMIN = 'ADMIN';
+  public static ROLE_USER = 'USER';
 
   constructor(
     public username: string,
@@ -12,7 +10,7 @@ export class User {
     public createdAt: Date|null,
     public lastConnection: Date|null,
     public picture: string,
-    public role: UserRoleEnum
+    public role: string
   ) {}
 
   public static fromApi(userApi: any): User {
@@ -22,7 +20,7 @@ export class User {
       userApi.firstname,
       userApi.lastname,
       userApi.createdAt,
-      userApi.lastConnection,
+      new Date(userApi.lastConnection),
       userApi.picture,
       userApi.role
     );
