@@ -12,14 +12,25 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
     meta: {
       requireBeAdmin: false,
+      requireBeAuthenticated: false
     }
   },
   {
     path: '/admin/users',
     name: 'UserList',
-    component: () => import(/* webpackChunkName: "about" */ '../views/admin/user-list.vue'),
+    component: () => import(/* webpackChunkName: "user-list" */ '../views/admin/user-list.vue'),
     meta: {
       requireBeAdmin: true,
+      requireBeAuthenticated: true
+    }
+  },
+  {
+    path: '/account',
+    name: 'Account',
+    component: () => import(/* webpackChunkName: "account" */ '../views/bank/account.vue'),
+    meta: {
+      requireBeAdmin: true,
+      requireBeAuthenticated: true
     }
   }
 ]
