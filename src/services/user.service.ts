@@ -1,6 +1,6 @@
-import { AxiosStatic } from 'axios';
-import { User } from '../models/user.model';
-import { ApiService } from './api.service';
+import {AxiosStatic} from 'axios';
+import {User} from '../models/user.model';
+import {ApiService} from './api.service';
 
 export class UserService extends ApiService {
   private static instanceChild: UserService;
@@ -19,7 +19,7 @@ export class UserService extends ApiService {
 
   public findAll(): Promise<User[]> {
     return new Promise((resolve, rejet) => {
-      this.httpGet('/api/v1/user').then((userList: any) => {
+      this.httpGet('/api/v1/user/admin/get-users').then((userList: any) => {
         const listUser: User[] = [];
         for(const user of userList) {
           listUser.push(User.fromApi(user));

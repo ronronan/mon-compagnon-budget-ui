@@ -1,5 +1,5 @@
-import { VueKeycloakInstance } from "@dsb-norge/vue-keycloak-js/dist/types";
-import { User } from "../models/user.model";
+import {VueKeycloakInstance} from "@dsb-norge/vue-keycloak-js/dist/types";
+import {User} from "../models/user.model";
 
 export interface IState {
   keycloak?: VueKeycloakInstance,
@@ -9,6 +9,6 @@ export interface IState {
 
 export const state: IState = {
   keycloak: undefined,
-  user: new User('unknown', 'unknow@test.fr', 'unknown', 'unknown', null, null, 'https://randomuser.me/api/portraits/men/79.jpg', User.ROLE_USER),
+  user: new User(0, 'unknown', 'unknow@test.fr', 'unknown', 'unknown', null, null, 'https://randomuser.me/api/portraits/men/79.jpg', User.ROLE_USER),
   usersList: []
 };

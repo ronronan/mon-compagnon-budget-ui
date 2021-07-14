@@ -3,6 +3,7 @@ export class User {
   public static ROLE_USER = 'USER';
 
   constructor(
+    public id: number,
     public username: string,
     public email: string,
     public firstname: string,
@@ -15,6 +16,7 @@ export class User {
 
   public static fromApi(userApi: any): User {
     return new User(
+      userApi.id,
       userApi.username,
       userApi.email,
       userApi.firstname,

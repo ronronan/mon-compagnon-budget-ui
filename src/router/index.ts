@@ -1,8 +1,4 @@
-import {
-  createRouter,
-  createWebHistory,
-  RouteRecordRaw
-} from 'vue-router';
+import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 import Home from '../views/home.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -29,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Account',
     component: () => import(/* webpackChunkName: "account" */ '../views/bank/account.vue'),
     meta: {
-      requireBeAdmin: true,
+      requireBeAdmin: false,
       requireBeAuthenticated: true
     }
   }
