@@ -49,6 +49,8 @@ export const actions: IActions = {
   checkInitRoute({ getters }, router: Router) {
     if (router.currentRoute.value.meta.requireBeAdmin && !getters.isUserAdmin) {
       router.push("/").then();
+    } else {
+      router.push(router.currentRoute.value.path).then();
     }
   },
   async loadUser({ commit }) {

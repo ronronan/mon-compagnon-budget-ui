@@ -21,7 +21,8 @@ const app = createApp(App)
       url: import.meta.env.VITE_KEYCLOAK_AUTH_URL
     },
     init: {
-      onLoad: 'check-sso',
+      flow: 'standard',
+      onLoad: 'check-sso'
     },
     onReady: (keycloak: VueKeycloakInstance) => {
       axios.interceptors.request.use(config => {
