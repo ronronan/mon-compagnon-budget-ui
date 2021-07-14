@@ -21,12 +21,15 @@ export const actions: IActions = {
   initRouter({ getters }, router: Router) {
     router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
       if (to.matched.some((record: RouteRecordNormalized) => record.meta.requireBeAdmin)) {
+        if (getters.isUserAdmin) {
+          next();
+        } else {
+          alert("Vous n'avez pas les droits nécessaires pour aller dans des pages dédiés au rôle ADMIN");
+          next("/");
+        }
+      } else if(to.matched.some((record: RouteRecordNormalized) => record.meta.requireBeAuthenticated)) {
         if (getters.isUserAuthenticated) {
-          if (getters.isUserAdmin) {
-            next();
-          } else {
-            alert("Vous n'avez pas les droits nécessaires pour aller dans des pages dédiés au rôle ADMIN");
-          }
+          next();
         } else {
           alert("Vous n'êtes pas authentifier");
           next("/");
